@@ -26,4 +26,9 @@ client.on('messageCreate', async(message) => {
     (new MessageHandler(message)).handle();
 });
 
+client.on('rateLimit', (rateLimitData) => {
+    console.log(rateLimitData);
+    process.exit(429);
+})
+
 

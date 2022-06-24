@@ -29,7 +29,7 @@ class RgbManager {
 
         this.loadConfigFromJsonFile();
 
-        setInterval(this.changeRolesColor.bind(this), 500);
+        setInterval(this.changeRolesColor.bind(this), 2000);
     }
 
     changeRolesColor() {
