@@ -17,3 +17,7 @@ npm install
 ```sh
 node ./src/index.js
 ```
+
+## Disclaimer
+
+This project is an experiment developed very quickly. The roles that need to be color alternated are stored in a simple JSON file, which is definitely not optimized for heavy loads.
