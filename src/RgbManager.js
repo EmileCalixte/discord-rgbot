@@ -14,7 +14,10 @@ class RgbManager {
     static instance = null;
 
     static getInstance(client) {
+        console.log('Getting RgbManager instance');
+
         if (RgbManager.instance === null) {
+            console.log('RgbManager instance does not exist, creating it');
             RgbManager.instance = new RgbManager(client);
         }
 
@@ -36,6 +39,7 @@ class RgbManager {
 
     changeRolesColor() {
         this.rolesToUpdate.forEach(role => {
+            console.log(`Changing ${role.id} color to ${COLORS[this.nextColorIndex]}`);
             role.setColor(COLORS[this.nextColorIndex]);
         });
 
@@ -62,6 +66,7 @@ class RgbManager {
             }
 
             if (!config[guild.id].includes(roleId)) {
+                console.log(`Enabling ${roleId}`);
                 config[guild.id].push(roleId);
             }
         });
@@ -78,6 +83,7 @@ class RgbManager {
                 return;
             }
 
+            console.log(`Disabling ${roleId}`);
             config[guild.id] = config[guild.id].filter(enabledRoleId => enabledRoleId !== roleId);
         });
 
@@ -104,18 +110,25 @@ class RgbManager {
     }
 
     async loadConfigFromJsonFile() {
+        console.log('Loading Rgb config');
+
         const guilds = await this.client.guilds.fetch();
         const fetchedGuilds = {};
+
+        console.log('Fetched client partial guilds');
 
         const config = JSON.parse(this.getConfigJsonContent());
 
         /** @type {Role[]} */
         const rolesToUpdate = [];
 
+        console.log('Registering roles to update');
+
         for (const guildId in config) {
             const oauth2Guild = guilds.get(guildId);
 
             if (!oauth2Guild) {
+                console.log('Cannot fetch guild');
                 continue;
             }
 
@@ -128,6 +141,7 @@ class RgbManager {
 
             config[guildId].forEach(async roleId => {
                 const role = await roleManager.fetch(roleId);
+                console.log(`Loading ${roleId}`);
                 rolesToUpdate.push(role);
             });
         }

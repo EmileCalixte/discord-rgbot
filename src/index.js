@@ -31,7 +31,7 @@ client.on('rateLimit', (rateLimitData) => {
     process.exit(429);
 });
 
-client.on('apiResponse', (request, response) => {
-    console.log(Array.from(response.headers.values));
-});
+//client.on('apiResponse', (request, response) => {
+//    console.log(Array.from(response.headers.values()));
+//});
 
