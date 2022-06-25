@@ -31,7 +31,12 @@ client.on('rateLimit', (rateLimitData) => {
     process.exit(429);
 });
 
-//client.on('apiResponse', (request, response) => {
-//    console.log(Array.from(response.headers.values()));
-//});
+client.on('apiResponse', (request, response) => {
+    const clonedResponse = response.clone();
+    console.log(`x-ratelimit-limit: ${clonedResponse.headers.get('x-ratelimit-limit')}`);
+    console.log(`x-ratelimit-remaining: ${clonedResponse.headers.get('x-ratelimit-remaining')}`);
+    console.log(`x-ratelimit-reset: ${clonedResponse.headers.get('x-ratelimit-reset')}`);
+    console.log(`x-ratelimit-reset-after: ${clonedResponse.headers.get('x-ratelimit-reset-after')}`);
+//    console.log(...clonedResponse.headers);
+});
 
