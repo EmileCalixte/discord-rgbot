@@ -6,7 +6,9 @@ const COLORS = [
     "#FF0000",
     "#00FF00",
     "#0000FF",
-]
+];
+
+const UPDATE_INTERVAL = 5000;
 
 class RgbManager {
     static instance = null;
@@ -29,7 +31,7 @@ class RgbManager {
 
         this.loadConfigFromJsonFile();
 
-        setInterval(this.changeRolesColor.bind(this), 2000);
+        setInterval(this.changeRolesColor.bind(this), UPDATE_INTERVAL);
     }
 
     changeRolesColor() {
