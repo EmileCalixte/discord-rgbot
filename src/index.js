@@ -29,6 +29,9 @@ client.on('messageCreate', async(message) => {
 client.on('rateLimit', (rateLimitData) => {
     console.log(rateLimitData);
     process.exit(429);
-})
+});
 
+client.on('apiResponse', (request, response) => {
+    console.log(Array.from(response.headers.values));
+});
 
